@@ -1,6 +1,6 @@
 import sys
 import os
-from PyQt5.QtWidgets import QApplication, QWidget, QTreeView, QFileSystemModel, QVBoxLayout
+from PyQt5.QtWidgets import QApplication, QWidget, QTreeView, QFileSystemModel, QVBoxLayout, QPushButton
 from PyQt5.QtCore import QModelIndex
 
 class FileSystemView(QWidget):
@@ -24,6 +24,8 @@ class FileSystemView(QWidget):
 
       layout = QVBoxLayout()
       layout.addWidget(self.tree)
+      btnSelect = QPushButton("SELECT")
+      layout.addWidget(btnSelect)
 
       self.setLayout(layout)
 
