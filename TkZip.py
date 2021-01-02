@@ -19,10 +19,14 @@ class zipper():
         self.entryDirs = Listbox(self.canvas,width=33,height=15)
         self.entryDirs.pack()
         self.entryDirs.config(yscrollcommand = self.scrollbar.set)
-
-        
+        self.scrollbar.config(command = self.entryDirs.yview)
+        self.file_list()
 
         self.window.mainloop()
+
+    def file_list(self):
+        for i in os.listdir():
+            self.entryDirs.insert(END,i)
 
 if __name__=="__main__":
     zipper()
