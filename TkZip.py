@@ -10,16 +10,19 @@ class zipper():
     def __init__(self):
         self.window = Tk()
         self.window.title("TkZip")
-        self.window.geometry("764x316")
+        self.window.geometry("764x320")
         self.canvas = Canvas(self.window)
         self.canvas.place(x=537,y=30)
-
+   
         self.scrollbar = Scrollbar(self.canvas,orient=VERTICAL)
         self.scrollbar.pack(side=RIGHT,fill=Y)
         self.entryDirs = Listbox(self.canvas,width=33,height=15)
         self.entryDirs.pack()
         self.entryDirs.config(yscrollcommand = self.scrollbar.set)
         self.scrollbar.config(command = self.entryDirs.yview)
+        self.btnSelect = Button(self.window,text="AGREGAR ARCHIVO",bg="light green",width=27)
+        self.btnSelect.place(x=537,y=277)
+        
         self.file_list()
 
         self.window.mainloop()
@@ -30,3 +33,4 @@ class zipper():
 
 if __name__=="__main__":
     zipper()
+
