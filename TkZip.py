@@ -4,6 +4,7 @@ from tkinter import *
 from tkinter import ttk
 from tkinter import messagebox, filedialog
 import tkinter.scrolledtext as sct
+import os
 
 class zipper():
     def __init__(self):
