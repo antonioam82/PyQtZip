@@ -11,6 +11,16 @@ class zipper():
         self.window = Tk()
         self.window.title("TkZip")
         self.window.geometry("764x316")
+        self.canvas = Canvas(self.window)
+        self.canvas.place(x=537,y=30)
+
+        self.scrollbar = Scrollbar(self.canvas,orient=VERTICAL)
+        self.scrollbar.pack(side=RIGHT,fill=Y)
+        self.entryDirs = Listbox(self.canvas,width=33,height=15)
+        self.entryDirs.pack()
+        self.entryDirs.config(yscrollcommand = self.scrollbar.set)
+
+        
 
         self.window.mainloop()
 
