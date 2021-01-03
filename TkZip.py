@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from tkinter import *
 from tkinter import ttk
@@ -16,6 +16,8 @@ class zipper():
    
         self.scrollbar = Scrollbar(self.canvas,orient=VERTICAL)
         self.scrollbar.pack(side=RIGHT,fill=Y)
+        self.filesBox = sct.ScrolledText(self.window,width=63,height=6)
+        self.filesBox.place(x=10,y=31)
         self.entryDirs = Listbox(self.canvas,width=33,height=15)
         self.entryDirs.pack()
         self.entryDirs.config(yscrollcommand = self.scrollbar.set)
