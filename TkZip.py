@@ -13,7 +13,7 @@ class zipper():
         self.window.geometry("764x320")
         self.canvas = Canvas(self.window)
         self.canvas.place(x=537,y=30)
-        self.Filelist = []
+        self.Filelist = []#
    
         self.scrollbar = Scrollbar(self.canvas,orient=VERTICAL)
         self.scrollbar.pack(side=RIGHT,fill=Y)
