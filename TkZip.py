@@ -1,4 +1,4 @@
-!/usr/bin/env python
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from tkinter import *
 from tkinter import ttk
@@ -13,6 +13,7 @@ class zipper():
         self.window.geometry("764x320")
         self.canvas = Canvas(self.window)
         self.canvas.place(x=537,y=30)
+        self.Filelist = []
    
         self.scrollbar = Scrollbar(self.canvas,orient=VERTICAL)
         self.scrollbar.pack(side=RIGHT,fill=Y)
@@ -22,7 +23,7 @@ class zipper():
         self.entryDirs.pack()
         self.entryDirs.config(yscrollcommand = self.scrollbar.set)
         self.scrollbar.config(command = self.entryDirs.yview)
-        self.btnSelect = Button(self.window,text="AGREGAR ARCHIVO",bg="light green",width=27)
+        self.btnSelect = Button(self.window,text="AGREGAR ARCHIVO",bg="light green",width=27,command=self.add_element)
         self.btnSelect.place(x=537,y=277)
         
         self.file_list()
@@ -31,7 +32,12 @@ class zipper():
 
     def file_list(self):
         for i in os.listdir():
+            self.Filelist.append(i)
             self.entryDirs.insert(END,i)
+
+    def add_element(self):
+        print(self.entryDirs.curselection()[0])
+        self.filesBox.insert(END,self.Filelist[self.entryDirs.curselection()[0]]+"--")
 
 if __name__=="__main__":
     zipper()
