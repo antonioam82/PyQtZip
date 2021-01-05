@@ -24,8 +24,10 @@ class zipper():
         self.entryDirs.pack()
         self.entryDirs.config(yscrollcommand = self.scrollbar.set)
         self.scrollbar.config(command = self.entryDirs.yview)
-        self.btnSelect = Button(self.window,text="AGREGAR ARCHIVO",bg="light green",width=27,command=self.add_element)
+        self.btnSelect = Button(self.window,text="AGREGAR ARCHIVO",bg="orange",width=27,command=self.add_element)
         self.btnSelect.place(x=537,y=277)
+        self.btnCreateZip = Button(self.window,text="CREAR ZIP",width=15,bg="light green")
+        self.btnCreateZip.place(x=217,y=170)
         
         self.file_list()
 
