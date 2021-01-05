@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+import zipfile
 from tkinter import *
 from tkinter import ttk
 from tkinter import messagebox, filedialog
@@ -26,7 +27,7 @@ class zipper():
         self.scrollbar.config(command = self.entryDirs.yview)
         self.btnSelect = Button(self.window,text="AGREGAR ARCHIVO",bg="orange",width=27,command=self.add_element)
         self.btnSelect.place(x=537,y=277)
-        self.btnCreateZip = Button(self.window,text="CREAR ZIP",width=15,bg="light green")
+        self.btnCreateZip = Button(self.window,text="CREAR ZIP",width=15,bg="light green",command=self.make_zip)
         self.btnCreateZip.place(x=217,y=170)
         
         self.file_list()
@@ -42,6 +43,12 @@ class zipper():
         element = self.Filelist[self.entryDirs.curselection()[0]]
         self.filesBox.insert(END,element+"\n")
         self.zip_content.append(element)
+
+    def make_zip(self):
+        with zipfile.ZipFile('carpeta_comprimida.zip','w') as archivo_zip:
+            for i in self.zip_content:
+                archivo_zip.write(i)
+        archivo_zip.close()
 
 if __name__=="__main__":
     zipper()
