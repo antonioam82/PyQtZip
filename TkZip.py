@@ -45,12 +45,17 @@ class zipper():
         self.zip_content.append(element)
 
     def make_zip(self):
-        with zipfile.ZipFile('carpeta_comprimida.zip','w') as archivo_zip:
-            for i in self.zip_content:
-                archivo_zip.write(i)
-        archivo_zip.close()
+        try:
+            with zipfile.ZipFile('carpeta_comprimida.zip','w') as archivo_zip:
+                for i in self.zip_content:
+                    archivo_zip.write(i)
+            archivo_zip.close()
+            messagebox.showinfo('TAREA COMPLETADA','Archivo .zip creado correctamente')
+        except Exception as e:
+            messagebox.showwarning('ERROR',str(e))
 
 if __name__=="__main__":
     zipper()
+
 
 
