@@ -39,9 +39,9 @@ class zipper():
             self.entryDirs.insert(END,i)
 
     def add_element(self):
-        print(self.entryDirs.curselection()[0])
         element = self.Filelist[self.entryDirs.curselection()[0]]
         self.filesBox.insert(END,element+"\n")
+        self.zip_content.append(element)
 
 if __name__=="__main__":
     zipper()
