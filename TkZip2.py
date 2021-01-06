@@ -45,8 +45,9 @@ class zipper():
     def add_element(self):
         try:
             element = self.Filelist[self.entryDirs.curselection()[0]]
-            self.filesBox.insert(END,element+"\n")
-            self.zip_content.append(element)
+            if element not in self.zip_content:
+                self.filesBox.insert(END,element+"\n")
+                self.zip_content.append(element)
         except Exception as e:
             the_error = str(e)
             if the_error == "tuple index out of range":
