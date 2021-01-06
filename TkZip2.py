@@ -47,6 +47,16 @@ class zipper():
         self.filesBox.insert(END,element+"\n")
         self.zip_content.append(element)
 
+    def folder_name(self):
+        count=0
+        for f in os.listdir():
+            if 'carpeta_comprimida' in f:
+                count+=1
+        if count>0:
+            return 'carpeta_comprimida '+str(count)+'.zip'
+        else:
+            return 'carpeta_comprimida.zip'
+
     def change_dir(self):
         new_dir = filedialog.askdirectory()
         if new_dir != "":
@@ -56,7 +66,8 @@ class zipper():
 
     def make_zip(self):
         try:
-            with zipfile.ZipFile('carpeta_comprimida.zip','w') as archivo_zip:
+            name = self.folder_name()
+            with zipfile.ZipFile(name,'w') as archivo_zip:
                 for i in self.zip_content:
                     archivo_zip.write(i)
             archivo_zip.close()
