@@ -43,9 +43,17 @@ class zipper():
             self.entryDirs.insert(END,i)
 
     def add_element(self):
-        element = self.Filelist[self.entryDirs.curselection()[0]]
-        self.filesBox.insert(END,element+"\n")
-        self.zip_content.append(element)
+        try:
+            element = self.Filelist[self.entryDirs.curselection()[0]]
+            self.filesBox.insert(END,element+"\n")
+            self.zip_content.append(element)
+        except Exception as e:
+            the_error = str(e)
+            if the_error == "tuple index out of range":
+                messagebox.showwarning("ERROR","No se seleccionó ningun elemento")
+            else:
+                messagebox.showwarning("ERROR",str(e))
+                
 
     def folder_name(self):
         count=0
