@@ -62,6 +62,7 @@ class zipper():
             archivo_zip.close()
             messagebox.showinfo('TAREA COMPLETADA','Archivo .zip creado correctamente')
             self.zip_content = []
+            self.filesBox.delete('1.0',END)
         except Exception as e:
             messagebox.showwarning('ERROR',str(e))
 
