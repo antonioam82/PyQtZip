@@ -29,7 +29,7 @@ class zipper():
         self.btnSelect.place(x=537,y=277)
         self.btnCreateZip = Button(self.window,text="CREAR ZIP",width=73,bg="light green",command=self.make_zip)
         self.btnCreateZip.place(x=10,y=245)
-        self.btnChangeDir = Button(self.window,text="CAMBIAR DIRECTORIO",width=73,bg="blue",fg="white")
+        self.btnChangeDir = Button(self.window,text="CAMBIAR DIRECTORIO",width=73,bg="blue",fg="white",command=self.change_dir)
         self.btnChangeDir.place(x=10,y=277)
         
         self.file_list()
@@ -50,6 +50,7 @@ class zipper():
     def change_dir(self):
         new_dir = filedialog.askdirectory()
         if new_dir != "":
+            self.entryDirs.delete(0,END)
             os.chdir(new_dir)
             self.file_list()
 
