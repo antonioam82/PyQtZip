@@ -14,7 +14,7 @@ class zipper():
         self.window.geometry("764x320")
         self.canvas = Canvas(self.window)
         self.canvas.place(x=537,y=30)
-        self.Filelist = []
+        #self.Filelist = []
         self.zip_content = []
    
         self.scrollbar = Scrollbar(self.canvas,orient=VERTICAL)
@@ -37,6 +37,7 @@ class zipper():
         self.window.mainloop()
 
     def file_list(self):
+        self.Filelist = []
         for i in os.listdir():
             self.Filelist.append(i)
             self.entryDirs.insert(END,i)
@@ -45,6 +46,12 @@ class zipper():
         element = self.Filelist[self.entryDirs.curselection()[0]]
         self.filesBox.insert(END,element+"\n")
         self.zip_content.append(element)
+
+    def change_dir(self):
+        new_dir = filedialog.askdirectory()
+        if new_dir != "":
+            os.chdir(new_dir)
+            self.file_list()
 
     def make_zip(self):
         try:
