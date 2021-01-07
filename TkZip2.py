@@ -11,7 +11,7 @@ class zipper():
     def __init__(self):
         self.window = Tk()
         self.window.title("TkZip")
-        self.window.geometry("764x320")
+        self.window.geometry("767x320")
         self.canvas = Canvas(self.window)
         self.canvas.place(x=537,y=30)
         #self.Filelist = []
@@ -21,16 +21,20 @@ class zipper():
         self.scrollbar.pack(side=RIGHT,fill=Y)
         self.filesBox = sct.ScrolledText(self.window,width=63,height=12)#height=6
         self.filesBox.place(x=10,y=31)
-        self.entryDirs = Listbox(self.canvas,width=33,height=15)
+        self.entryDirs = Listbox(self.canvas,width=34,height=15)
         self.entryDirs.pack()
         self.entryDirs.config(yscrollcommand = self.scrollbar.set)
         self.scrollbar.config(command = self.entryDirs.yview)
-        self.btnSelect = Button(self.window,text="AGREGAR/QUITAR ARCHIVO",bg="orange",width=27,command=self.add_element)
+        self.btnSelect = Button(self.window,text="AGREGAR/QUITAR ARCHIVO",bg="orange",width=28,command=self.add_element)
         self.btnSelect.place(x=537,y=277)
         self.btnCreateZip = Button(self.window,text="CREAR ZIP",width=73,bg="light green",command=self.make_zip)
         self.btnCreateZip.place(x=10,y=245)
         self.btnChangeDir = Button(self.window,text="CAMBIAR DIRECTORIO",width=73,bg="blue",fg="white",command=self.change_dir)
         self.btnChangeDir.place(x=10,y=277)
+        self.current_dir = StringVar()
+        self.currentDir = Entry(self.window,width=127,textvariable=self.current_dir)
+        self.currentDir.place(x=0,y=0)
+        
         
         self.file_list()
 
@@ -41,6 +45,7 @@ class zipper():
         for i in os.listdir():
             self.Filelist.append(i)
             self.entryDirs.insert(END,i)
+        self.current_dir.set(os.getcwd())
 
     def add_element(self):
         try:
@@ -79,6 +84,7 @@ class zipper():
             self.filesBox.delete('1.0',END)
             self.zip_content=[]
             self.file_list()
+            self.current_dir.set(os.getcwd())
 
     def make_zip(self):
         try:
