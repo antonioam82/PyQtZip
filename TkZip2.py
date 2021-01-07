@@ -25,7 +25,7 @@ class zipper():
         self.entryDirs.pack()
         self.entryDirs.config(yscrollcommand = self.scrollbar.set)
         self.scrollbar.config(command = self.entryDirs.yview)
-        self.btnSelect = Button(self.window,text="AGREGAR ARCHIVO",bg="orange",width=27,command=self.add_element)
+        self.btnSelect = Button(self.window,text="AGREGAR/QUITAR ARCHIVO",bg="orange",width=27,command=self.add_element)
         self.btnSelect.place(x=537,y=277)
         self.btnCreateZip = Button(self.window,text="CREAR ZIP",width=73,bg="light green",command=self.make_zip)
         self.btnCreateZip.place(x=10,y=245)
@@ -76,6 +76,8 @@ class zipper():
         if new_dir != "":
             self.entryDirs.delete(0,END)
             os.chdir(new_dir)
+            self.filesBox.delete('1.0',END)
+            self.zip_content=[]
             self.file_list()
 
     def make_zip(self):
