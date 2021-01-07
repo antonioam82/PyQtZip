@@ -48,6 +48,11 @@ class zipper():
             if element not in self.zip_content:
                 self.filesBox.insert(END,element+"\n")
                 self.zip_content.append(element)
+            else:
+                self.zip_content.remove(element)
+                self.filesBox.delete('1.0',END)
+                for i in self.zip_content:
+                    self.filesBox.insert(END,i+"\n")
         except Exception as e:
             the_error = str(e)
             if the_error == "tuple index out of range":
