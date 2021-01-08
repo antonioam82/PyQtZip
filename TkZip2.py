@@ -11,9 +11,11 @@ class zipper():
     def __init__(self):
         self.window = Tk()
         self.window.title("TkZip")
-        self.window.geometry("767x320")
+        self.window.geometry("773x320")
+        self.window.config(bg="navajo white")
         self.canvas = Canvas(self.window)
         self.canvas.place(x=537,y=30)
+        #self.Filelist = []
         self.zip_content = []
    
         self.scrollbar = Scrollbar(self.canvas,orient=VERTICAL)
@@ -35,7 +37,7 @@ class zipper():
         self.btnChangeDir = Button(self.window,text="CAMBIAR DIRECTORIO",width=73,bg="blue",fg="white",command=self.change_dir)
         self.btnChangeDir.place(x=10,y=277)
         self.current_dir = StringVar()
-        self.currentDir = Entry(self.window,width=127,textvariable=self.current_dir)
+        self.currentDir = Entry(self.window,width=128,textvariable=self.current_dir)
         self.currentDir.place(x=0,y=0)
         
         self.file_list()
@@ -103,3 +105,4 @@ class zipper():
 
 if __name__=="__main__":
     zipper()
+
