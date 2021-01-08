@@ -14,7 +14,6 @@ class zipper():
         self.window.geometry("767x320")
         self.canvas = Canvas(self.window)
         self.canvas.place(x=537,y=30)
-        #self.Filelist = []
         self.zip_content = []
    
         self.scrollbar = Scrollbar(self.canvas,orient=VERTICAL)
