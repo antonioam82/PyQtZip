@@ -19,12 +19,16 @@ class zipper():
    
         self.scrollbar = Scrollbar(self.canvas,orient=VERTICAL)
         self.scrollbar.pack(side=RIGHT,fill=Y)
+        self.Hscrollbar = Scrollbar(self.canvas,orient=HORIZONTAL)
+        self.Hscrollbar.pack(side=BOTTOM,fill=X)
         self.filesBox = sct.ScrolledText(self.window,width=63,height=12)#height=6
         self.filesBox.place(x=10,y=31)
-        self.entryDirs = Listbox(self.canvas,width=34,height=15)
+        self.entryDirs = Listbox(self.canvas,width=34,height=14)#height=15
         self.entryDirs.pack()
         self.entryDirs.config(yscrollcommand = self.scrollbar.set)
+        self.entryDirs.config(xscrollcommand = self.Hscrollbar.set)
         self.scrollbar.config(command = self.entryDirs.yview)
+        self.Hscrollbar.config(command = self.entryDirs.xview)
         self.btnSelect = Button(self.window,text="AGREGAR/QUITAR ARCHIVO",bg="orange",width=28,command=self.add_element)
         self.btnSelect.place(x=537,y=277)
         self.btnCreateZip = Button(self.window,text="CREAR ZIP",width=73,bg="light green",command=self.make_zip)
