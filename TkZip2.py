@@ -38,7 +38,6 @@ class zipper():
         self.currentDir = Entry(self.window,width=127,textvariable=self.current_dir)
         self.currentDir.place(x=0,y=0)
         
-        
         self.file_list()
 
         self.window.mainloop()
