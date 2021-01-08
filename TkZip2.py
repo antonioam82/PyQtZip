@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 import zipfile
+import re
 from tkinter import *
 from tkinter import ttk
 from tkinter import messagebox, filedialog
@@ -12,7 +13,7 @@ class zipper():
         self.window = Tk()
         self.window.title("TkZip")
         self.window.geometry("773x320")
-        self.window.config(bg="navajo white")
+        self.window.config(bg="gainsboro")
         self.canvas = Canvas(self.window)
         self.canvas.place(x=537,y=30)
         #self.Filelist = []
@@ -68,7 +69,6 @@ class zipper():
                 messagebox.showwarning("ERROR","No se seleccionó ningun elemento")
             else:
                 messagebox.showwarning("ERROR",str(e))
-                
 
     def folder_name(self):
         count=0
@@ -105,4 +105,5 @@ class zipper():
 
 if __name__=="__main__":
     zipper()
+
 
