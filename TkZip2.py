@@ -22,8 +22,15 @@ class zipper():
         self.scrollbar.pack(side=RIGHT,fill=Y)
         self.Hscrollbar = Scrollbar(self.canvas,orient=HORIZONTAL)
         self.Hscrollbar.pack(side=BOTTOM,fill=X)
-        self.filesBox = sct.ScrolledText(self.window,width=63,height=12)#height=6
+        self.filesBox = sct.ScrolledText(self.window,width=63,height=11)#height=12
         self.filesBox.place(x=10,y=31)
+        self.folderNme = StringVar()
+        self.entryName = Entry(self.window,width=38,textvariable=self.folderNme)
+        self.entryName.place(x=195,y=216)
+        self.labelName = Label(self.window,text="NOMBRE CARPETA (OPCIONAL):",bg="gainsboro")
+        self.labelName.place(x=10,y=216)
+        self.btnClear = Button(self.window,text="BORRAR TODO",command=self.clear_all)
+        self.btnClear.place(x=439,y=212)
         self.entryDirs = Listbox(self.canvas,width=34,height=14)#height=15
         self.entryDirs.pack()
         self.entryDirs.config(yscrollcommand = self.scrollbar.set)
@@ -81,15 +88,22 @@ su posible inclusión''')
             else:
                 messagebox.showwarning("ERROR",str(e))
 
+    def clear_all(self):
+        self.zip_content = []
+        self.filesBox.delete('1.0',END)        
+
     def folder_name(self):
-        count=0
-        for f in os.listdir():
-            if 'carpeta_comprimida' in f:
-                count+=1
-        if count>0:
-            return 'carpeta_comprimida '+str(count)+'.zip'
+        if self.folderNme.get() == "":
+            count=0
+            for f in os.listdir():
+                if 'carpeta_comprimida' in f:
+                    count+=1
+            if count>0:
+                return 'carpeta_comprimida '+str(count)+'.zip'
+            else:
+                return 'carpeta_comprimida.zip'
         else:
-            return 'carpeta_comprimida.zip'
+            return self.folderNme.get()
 
     def change_dir(self):
         new_dir = filedialog.askdirectory()
@@ -104,13 +118,14 @@ su posible inclusión''')
     def make_zip(self):
         try:
             name = self.folder_name()
+            print(name)
             with zipfile.ZipFile(name,'w') as archivo_zip:
                 for i in self.zip_content:
                     archivo_zip.write(i)
             archivo_zip.close()
             messagebox.showinfo('TAREA COMPLETADA','Archivo .zip creado correctamente')
-            self.zip_content = []
-            self.filesBox.delete('1.0',END)
+            #self.zip_content = []
+            #self.filesBox.delete('1.0',END)
         except Exception as e:
             messagebox.showwarning('ERROR',str(e))
 
