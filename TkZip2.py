@@ -15,8 +15,8 @@ class zipper():
         self.window.config(bg="gainsboro")
         self.canvas = Canvas(self.window)
         self.canvas.place(x=537,y=30)
-        #self.Filelist = []
         self.zip_content = []
+        self.special_chars = False
    
         self.scrollbar = Scrollbar(self.canvas,orient=VERTICAL)
         self.scrollbar.pack(side=RIGHT,fill=Y)
@@ -39,7 +39,8 @@ class zipper():
         self.current_dir = StringVar()
         self.currentDir = Entry(self.window,width=128,textvariable=self.current_dir)
         self.currentDir.place(x=0,y=0)
-
+        
+        
         self.file_list()
 
         self.window.mainloop()
@@ -51,8 +52,17 @@ class zipper():
                 self.Filelist.append(i)
                 self.entryDirs.insert(END,i)
             except:
+                self.special_chars = True
                 pass
         self.current_dir.set(os.getcwd())
+        
+        if self.special_chars == True:
+            messagebox.showinfo("ARCHIVOS EXCLUIDOS",'''Se ha detectado uno o más archivos que
+por contener caracteres especiales no son
+suceptibles de ser comprimidos en un ZIP.
+Cambie el nombre de dichos archivos para
+su posible inclusión''')
+        self.special_chars = False
 
     def add_element(self):
         try:
