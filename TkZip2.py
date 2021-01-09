@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 import zipfile
-#import re
 from tkinter import *
 from tkinter import ttk
 from tkinter import messagebox, filedialog
@@ -41,6 +40,7 @@ class zipper():
         self.currentDir = Entry(self.window,width=128,textvariable=self.current_dir)
         self.currentDir.place(x=0,y=0)
         
+        
         self.file_list()
 
         self.window.mainloop()
@@ -48,8 +48,12 @@ class zipper():
     def file_list(self):
         self.Filelist = []
         for i in os.listdir():
-            self.Filelist.append(i)
-            self.entryDirs.insert(END,i)
+            try:
+                self.Filelist.append(i)
+                self.entryDirs.insert(END,i)
+                print(i)
+            except:
+                pass
         self.current_dir.set(os.getcwd())
 
     def add_element(self):
