@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 import zipfile
-import re
+#import re
 from tkinter import *
 from tkinter import ttk
 from tkinter import messagebox, filedialog
