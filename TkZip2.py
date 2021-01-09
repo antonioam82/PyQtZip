@@ -61,7 +61,7 @@ class zipper():
 por contener caracteres especiales no son
 suceptibles de ser comprimidos en un ZIP.
 Cambie el nombre de dichos archivos para
-su posible inclusión''')
+su posible inclusión.''')
         self.special_chars = False
 
     def add_element(self):
