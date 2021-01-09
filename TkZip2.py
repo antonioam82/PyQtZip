@@ -39,8 +39,7 @@ class zipper():
         self.current_dir = StringVar()
         self.currentDir = Entry(self.window,width=128,textvariable=self.current_dir)
         self.currentDir.place(x=0,y=0)
-        
-        
+
         self.file_list()
 
         self.window.mainloop()
@@ -51,7 +50,6 @@ class zipper():
             try:
                 self.Filelist.append(i)
                 self.entryDirs.insert(END,i)
-                print(i)
             except:
                 pass
         self.current_dir.set(os.getcwd())
