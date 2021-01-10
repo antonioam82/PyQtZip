@@ -88,6 +88,13 @@ su posible inclusión''')
             else:
                 messagebox.showwarning("ERROR",str(e))
 
+    def check_ext(self,text):
+        if not text.endswith(".zip"):
+            namef = text+".zip"
+        else:
+            namef = text
+        return namef
+
     def clear_all(self):
         self.zip_content = []
         self.filesBox.delete('1.0',END)        
@@ -117,8 +124,7 @@ su posible inclusión''')
 
     def make_zip(self):
         try:
-            name = self.folder_name()
-            print(name)
+            name = self.check_ext(self.folder_name())
             with zipfile.ZipFile(name,'w') as archivo_zip:
                 for i in self.zip_content:
                     archivo_zip.write(i)
