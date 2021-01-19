@@ -67,7 +67,7 @@ class zipper():
 por contener caracteres especiales no son
 suceptibles de ser comprimidos en un ZIP.
 Cambie el nombre de dichos archivos para
-su posible inclusión''')
+su posible inclusión.''')
         self.special_chars = False
 
     def add_element(self):
@@ -84,7 +84,7 @@ su posible inclusión''')
         except Exception as e:
             the_error = str(e)
             if the_error == "tuple index out of range":
-                messagebox.showwarning("ERROR","No se seleccionó ningun elemento")
+                messagebox.showwarning("ERROR","No se seleccionó ningun elemento.")
             else:
                 messagebox.showwarning("ERROR",str(e))
 
@@ -129,9 +129,7 @@ su posible inclusión''')
                 for i in self.zip_content:
                     archivo_zip.write(i)
             archivo_zip.close()
-            messagebox.showinfo('TAREA COMPLETADA','Archivo .zip creado correctamente')
-            #self.zip_content = []
-            #self.filesBox.delete('1.0',END)
+            messagebox.showinfo('TAREA COMPLETADA','Archivo .zip creado correctamente.')
         except Exception as e:
             messagebox.showwarning('ERROR',str(e))
 
