@@ -129,7 +129,7 @@ su posible inclusión.''')
                 for i in self.zip_content:
                     archivo_zip.write(i)
             archivo_zip.close()
-            messagebox.showinfo('TAREA COMPLETADA','Archivo .zip creado correctamente.')
+            messagebox.showinfo('TAREA COMPLETADA','Archivo \'{}\' creado correctamente.'.format(name))
         except Exception as e:
             messagebox.showwarning('ERROR',str(e))
 
