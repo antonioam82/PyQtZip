@@ -10,7 +10,7 @@ import os
 class zipper():
     def __init__(self):
         self.window = Tk()
-        self.window.title("TkZip")
+        self.window.title("TkZip4")
         self.window.geometry("773x320")
         self.window.config(bg="gainsboro")
         self.canvas = Canvas(self.window)
