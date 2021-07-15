@@ -39,7 +39,7 @@ class zipper():
         self.Hscrollbar.config(command = self.entryDirs.xview)
         self.btnSelect = Button(self.window,text="ADD/DEL FILE",bg="orange",width=15,command=self.add_element)
         self.btnSelect.place(x=537,y=277)
-        self.btnSelectAll = Button(self.window,text="SELECT ALL FILES",bg="orange",width=15)
+        self.btnSelectAll = Button(self.window,text="SELECT ALL FILES",bg="orange",width=15,command=self.add_all)
         self.btnSelectAll.place(x=654,y=277)
         self.btnCreateZip = Button(self.window,text="CREATE ZIP",width=73,bg="light green",command=self.make_zip)
         self.btnCreateZip.place(x=10,y=245)
@@ -89,6 +89,12 @@ su posible inclusión.''')
                 messagebox.showwarning("ERROR","No se seleccionó ningun elemento.")
             else:
                 messagebox.showwarning("ERROR",str(e))
+
+    def add_all(self):
+        for i in self.Filelist:
+            if i not in self.zip_content:
+                self.filesBox.insert(END,i+"\n")
+                self.zip_content.append(i)
 
     def check_ext(self,text):
         if not text.endswith(".zip"):
