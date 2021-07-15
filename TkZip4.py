@@ -10,8 +10,8 @@ import os
 class zipper():
     def __init__(self):
         self.window = Tk()
-        self.window.title("TkZip4")
-        self.window.geometry("773x320")
+        self.window.title("TkZip2")
+        self.window.geometry("779x320")
         self.window.config(bg="gainsboro")
         self.canvas = Canvas(self.window)
         self.canvas.place(x=537,y=30)
@@ -31,22 +31,22 @@ class zipper():
         self.labelName.place(x=10,y=216)
         self.btnClear = Button(self.window,text="DELETE ALL",command=self.clear_all)
         self.btnClear.place(x=439,y=212)
-        self.entryDirs = Listbox(self.canvas,width=34,height=14)#height=15
+        self.entryDirs = Listbox(self.canvas,width=35,height=14)#height=15
         self.entryDirs.pack()
         self.entryDirs.config(yscrollcommand = self.scrollbar.set)
         self.entryDirs.config(xscrollcommand = self.Hscrollbar.set)
         self.scrollbar.config(command = self.entryDirs.yview)
         self.Hscrollbar.config(command = self.entryDirs.xview)
-        self.btnSelect = Button(self.window,text="ADD/DEL FILE",bg="orange",width=13,command=self.add_element)
+        self.btnSelect = Button(self.window,text="ADD/DEL FILE",bg="orange",width=15,command=self.add_element)
         self.btnSelect.place(x=537,y=277)
-        self.btnSelectAll = Button(self.window,text="SELECT ALL FILES",bg="orange",width=13)
-        self.btnSelectAll.place(x=646,y=277)
+        self.btnSelectAll = Button(self.window,text="SELECT ALL FILES",bg="orange",width=15)
+        self.btnSelectAll.place(x=654,y=277)
         self.btnCreateZip = Button(self.window,text="CREATE ZIP",width=73,bg="light green",command=self.make_zip)
         self.btnCreateZip.place(x=10,y=245)
         self.btnChangeDir = Button(self.window,text="CHANGE DIRECTORY",width=73,bg="blue",fg="white",command=self.change_dir)
         self.btnChangeDir.place(x=10,y=277)
         self.current_dir = StringVar()
-        self.currentDir = Entry(self.window,width=128,textvariable=self.current_dir)
+        self.currentDir = Entry(self.window,width=129,textvariable=self.current_dir)
         self.currentDir.place(x=0,y=0)
 
         self.file_list()
