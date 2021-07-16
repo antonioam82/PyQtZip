@@ -110,7 +110,8 @@ su posible inclusión.''')
 
     def clear_all(self):
         self.zip_content = []
-        self.filesBox.delete('1.0',END)        
+        self.filesBox.delete('1.0',END)
+        self.entryDirs.selection_clear(0,END)
 
     def folder_name(self):
         if self.folderNme.get() == "":
