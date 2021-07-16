@@ -30,7 +30,7 @@ class zipper():
         Entry(self.window,width=28,textvariable=self.folderNme).place(x=133,y=216)
         Label(self.window,text="ZIP FILE NAME (OPT):",bg="gainsboro").place(x=10,y=216)
         Button(self.window,text="CLEAR",width=9,command=self.clear_all).place(x=446,y=212)
-        self.entryDirs = Listbox(self.canvas,width=35,height=14)#height=15
+        self.entryDirs = Listbox(self.canvas,selectmode='multiple',width=35,height=14)#height=15
         self.entryDirs.pack()
         self.entryDirs.config(yscrollcommand = self.scrollbar.set)
         self.entryDirs.config(xscrollcommand = self.Hscrollbar.set)
@@ -70,15 +70,24 @@ su posible inclusión.''')
 
     def add_element(self):
         try:
-            element = self.Filelist[self.entryDirs.curselection()[0]]
-            if element not in self.zip_content:
-                self.filesBox.insert(END,element+"\n")
+            selection = self.entryDirs.curselection()
+            for i in selection:
+                if self.Filelist[i] not in self.zip_content:
+                    self.zip_content.append(self.Filelist[i])
+                    self.filesBox.insert(END,self.Filelist[i]+"\n")
+                else:
+                    self.zip_content.remove(self.Filelist[i])
+                    self.filesBox.delete('1.0',END)
+            #print(self.zip_content)
+            
+            '''if selection not in self.zip_content:
+                self.filesBox.insert(END,selction+"\n")
                 self.zip_content.append(element)
             else:
                 self.zip_content.remove(element)
                 self.filesBox.delete('1.0',END)
                 for i in self.zip_content:
-                    self.filesBox.insert(END,i+"\n")
+                    self.filesBox.insert(END,i+"\n")'''
         except Exception as e:
             the_error = str(e)
             if the_error == "tuple index out of range":
