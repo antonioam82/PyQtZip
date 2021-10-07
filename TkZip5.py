@@ -28,8 +28,8 @@ class zipper():
         self.folderNme = StringVar()
         self.folderNme.set(self.folder_name())
         self.entryName = Entry(self.window,width=38,textvariable=self.folderNme)
-        self.entryName.place(x=181,y=216)
-        self.labelName = Label(self.window,text="NOMBRE CARPETA ZIP (OPC):",bg="gainsboro")
+        self.entryName.place(x=187,y=216)
+        self.labelName = Label(self.window,text="NOMB CARPETA COMPRIMIDA:",bg="gainsboro")
         self.labelName.place(x=10,y=216)
         self.btnClear = Button(self.window,text="BORRAR TODO",command=self.clear_all)
         self.btnClear.place(x=439,y=212)
@@ -115,8 +115,6 @@ su posible inclusión.''')
             return self.folderNme.get()
 
     def folder_name(self):
-        #if self.folderNme.get() == "":
-        print("EXECUTED")
         count=0
         for f in os.listdir():
             if 'carpeta_comprimida' in f:
