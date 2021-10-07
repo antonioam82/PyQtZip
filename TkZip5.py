@@ -39,7 +39,7 @@ class zipper():
         self.entryDirs.config(xscrollcommand = self.Hscrollbar.set)
         self.scrollbar.config(command = self.entryDirs.yview)
         self.Hscrollbar.config(command = self.entryDirs.xview)
-        self.btnSelect = Button(self.window,text="AÑADIR/QUITAR",bg="orange",width=28,command=self.add_element)
+        self.btnSelect = Button(self.window,text="AÑADIR/QUITAR",bg="orange",width=31,command=self.add_element)
         self.btnSelect.place(x=537,y=277)
         self.btnCreateZip = Button(self.window,text="CREAR ZIP",width=73,bg="light green",command=self.make_zip)
         self.btnCreateZip.place(x=10,y=245)
