@@ -79,15 +79,18 @@ su posible inclusión.''')
  
     def add_element(self):
         try:
-            element = self.BMP(self.Filelist[self.entryDirs.curselection()[0]])
-            if element not in self.zip_content:
-                self.filesBox.insert(END,element+"\n")
-                self.zip_content.append(element)
-            else:
-                self.zip_content.remove(element)
-                self.filesBox.delete('1.0',END)
-                for i in self.zip_content:
-                    self.filesBox.insert(END,i+"\n")
+            for i in self.entryDirs.curselection():
+                element = self.BMP(self.Filelist[i])
+                print(element)
+                if element not in self.zip_content:
+                    self.filesBox.insert(END,element+"\n")
+                    self.zip_content.append(element)
+                else:
+                    self.zip_content.remove(element)
+                    self.filesBox.delete('1.0',END)
+            print(self.zip_content)
+            #for i in self.zip_content:
+                #self.filesBox.insert(END,i+"\n")
         except Exception as e:
             the_error = str(e)
             if the_error == "tuple index out of range":
@@ -98,6 +101,7 @@ su posible inclusión.''')
     def clear_selection(self):
         for i in self.entryDirs.curselection():
             self.entryDirs.selection_clear(i)
+        self.zip_content = []
  
     def check_ext(self,text):
         if not text.endswith(".zip"):
