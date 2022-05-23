@@ -35,13 +35,14 @@ class zipper():
         self.btnClear.place(x=439,y=212)
         self.entryDirs = Listbox(self.canvas,width=34,height=14)
         self.entryDirs.pack()
+        self.entryDirs.configure(selectmode='multiple')
         self.entryDirs.config(yscrollcommand = self.scrollbar.set)
         self.entryDirs.config(xscrollcommand = self.Hscrollbar.set)
         self.scrollbar.config(command = self.entryDirs.yview)
         self.Hscrollbar.config(command = self.entryDirs.xview)
         self.btnSelect = Button(self.window,text="ADD/REMOVE",bg="orange",width=15,command=self.add_element)
         self.btnSelect.place(x=537,y=277)
-        Button(self.window,text="CLEAR SELECTION",bg="orange",width=14).place(x=654,y=277)
+        Button(self.window,text="CLEAR SELECTION",bg="orange",width=14,command=self.clear_selection).place(x=654,y=277)
         self.btnCreateZip = Button(self.window,text="CREATE ZIP",width=73,bg="light green",command=self.make_zip)
         self.btnCreateZip.place(x=10,y=245)
         self.btnChangeDir = Button(self.window,text="CHANGE DIR",width=73,bg="blue",fg="white",command=self.change_dir)
@@ -93,6 +94,10 @@ su posible inclusión.''')
                 messagebox.showwarning("ERROR","No se seleccionó ningun elemento.")
             else:
                 messagebox.showwarning("ERROR",str(e))
+
+    def clear_selection(self):
+        for i in self.entryDirs.curselection():
+            self.entryDirs.selection_clear(i)
  
     def check_ext(self,text):
         if not text.endswith(".zip"):
