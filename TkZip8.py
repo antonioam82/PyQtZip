@@ -8,3 +8,9 @@ import tkinter.scrolledtext as sct
 import os
 
 #more code here
+class zipper():
+    def __init__(self):
+        self.window = tk.Tk()
+
+if __name__=="__main__":
+    zipper()
