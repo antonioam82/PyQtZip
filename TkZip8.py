@@ -16,6 +16,7 @@ class zipper():
         self.canvas = tk.Canvas(self.window)
         self.canvas.place(x=537,y=30)
         self.zip_content = []
+        self.special_chars = False
 
         self.scrollbar = tk.Scrollbar(self.canvas,orient=tk.VERTICAL)
         self.scrollbar.pack(side=tk.RIGHT,fill=tk.Y)
@@ -47,7 +48,36 @@ class zipper():
         self.btnChangeDir.place(x=10,y=277)
         self.current_dir = tk.StringVar()
         self.currentDir = tk.Entry(self.window,width=128,textvariable=self.current_dir)
-        self.currentDir.place(x=0,y=0)        
+        self.currentDir.place(x=0,y=0)
+
+        self.file_list()
+ 
+        self.window.mainloop()
+
+    def BMP(self,s):
+        return "".join((i if ord(i) < 10000 else '\ufffd' for i in s))
+
+    def file_list(self):
+        counter = 0
+        self.Filelist = []
+        for i in os.listdir():
+            try:
+                self.entryDirs.insert(tk.END,self.BMP(i))
+                counter+=1
+                self.Filelist.append(i)
+            except:
+                self.special_chars = True
+                pass
+        self.current_dir.set(os.getcwd())
+ 
+        if self.special_chars == True:
+            messagebox.showinfo("ARCHIVOS EXCLUIDOS",'''Se ha detectado uno o más archivos que
+por contener caracteres especiales no son
+suceptibles de ser comprimidos en un ZIP.
+Cambie el nombre de dichos archivos para
+su posible inclusión.''')
+        print(counter)
+        self.special_chars = False
 
 if __name__=="__main__":
     zipper()
