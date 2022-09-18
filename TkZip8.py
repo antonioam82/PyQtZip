@@ -17,5 +17,38 @@ class zipper():
         self.canvas.place(x=537,y=30)
         self.zip_content = []
 
+        self.scrollbar = tk.Scrollbar(self.canvas,orient=tk.VERTICAL)
+        self.scrollbar.pack(side=tk.RIGHT,fill=tk.Y)
+        self.Hscrollbar = tk.Scrollbar(self.canvas,orient=tk.HORIZONTAL)
+        self.Hscrollbar.pack(side=tk.BOTTOM,fill=tk.X)
+        self.filesBox = sct.ScrolledText(self.window,width=63,height=11)
+        self.filesBox.place(x=10,y=31)
+        self.folderNme = tk.StringVar()
+        self.folderNme.set(" ")###
+        self.entryName = tk.Entry(self.window,width=38,textvariable=self.folderNme)
+        self.entryName.place(x=100,y=216)
+        self.labelName = tk.Label(self.window,text="ZIP FILE NAME:",bg="gainsboro")
+        self.labelName.place(x=10,y=216)
+        self.btnClear = tk.Button(self.window,text="CLEAR ALL")
+        self.btnClear.place(x=439,y=212)
+        self.entryDirs = tk.Listbox(self.canvas,width=34,height=14)
+        self.entryDirs.pack()
+        self.entryDirs.configure(selectmode='multiple')
+        self.entryDirs.config(yscrollcommand = self.scrollbar.set)
+        self.entryDirs.config(xscrollcommand = self.Hscrollbar.set)
+        self.scrollbar.config(command = self.entryDirs.yview)
+        self.Hscrollbar.config(command = self.entryDirs.xview)
+        self.btnSelect = tk.Button(self.window,text="ADD/REMOVE",bg="orange",width=15)
+        self.btnSelect.place(x=537,y=277)
+        tk.Button(self.window,text="CLEAR SELECTION",bg="orange",width=14).place(x=654,y=277)
+        self.btnCreateZip = tk.Button(self.window,text="CREATE ZIP",width=73,bg="light green")
+        self.btnCreateZip.place(x=10,y=245)
+        self.btnChangeDir = tk.Button(self.window,text="CHANGE DIR",width=73,bg="blue",fg="white")
+        self.btnChangeDir.place(x=10,y=277)
+        self.current_dir = tk.StringVar()
+        self.currentDir = tk.Entry(self.window,width=128,textvariable=self.current_dir)
+        self.currentDir.place(x=0,y=0)        
+
 if __name__=="__main__":
     zipper()
+
