@@ -25,7 +25,7 @@ class zipper():
         self.filesBox = sct.ScrolledText(self.window,width=63,height=11)
         self.filesBox.place(x=10,y=31)
         self.folderNme = tk.StringVar()
-        self.folderNme.set(" ")###
+        self.folderNme.set(self.folder_name())###
         self.entryName = tk.Entry(self.window,width=38,textvariable=self.folderNme)
         self.entryName.place(x=100,y=216)
         self.labelName = tk.Label(self.window,text="ZIP FILE NAME:")
@@ -56,6 +56,19 @@ class zipper():
 
     def BMP(self,s):
         return "".join((i if ord(i) < 10000 else '\ufffd' for i in s))
+
+    def folder_name(self):
+        if self.folderNme.get() == "":
+            count=0
+            for f in os.listdir():
+                if 'carpeta_comprimida' in f:
+                    count+=1
+            if count>0:
+                return 'carpeta_comprimida '+str(count)+'.zip'
+            else:
+                return 'carpeta_comprimida.zip'
+        else:
+            return self.folderNme.get()
 
     def file_list(self):
         counter = 0
