@@ -41,7 +41,7 @@ class zipper():
         self.Hscrollbar.config(command = self.entryDirs.xview)
         self.btnSelect = tk.Button(self.window,text="ADD/REMOVE",width=15,bg="gray90")
         self.btnSelect.place(x=537,y=277)
-        tk.Button(self.window,text="CLEAR SELECTION",width=14,bg="gray90").place(x=654,y=277)
+        tk.Button(self.window,text="CLEAR SELECTION",width=14,bg="gray90",command=self.clear_selection).place(x=654,y=277)
         self.btnCreateZip = tk.Button(self.window,text="CREATE ZIP",width=73,bg="gray90")
         self.btnCreateZip.place(x=10,y=245)
         self.btnChangeDir = tk.Button(self.window,text="CHANGE DIR",width=73,bg="gray90")
@@ -69,6 +69,11 @@ class zipper():
                 return 'carpeta_comprimida.zip'
         else:
             return self.folderNme.get()
+
+    def clear_selection(self):
+        for i in self.entryDirs.curselection():
+            self.entryDirs.selection_clear(i)
+        self.zip_content = []
 
     def file_list(self):
         counter = 0
