@@ -67,8 +67,8 @@ class zipper():
             else:
                 self.zip_content.remove(element)
                 self.filesBox.delete('1.0',tk.END)
-                for i in self.zip_content:
-                    self.filesBox.insert(tk.END,i+"\n")
+                #for i in self.zip_content:
+                    #self.filesBox.insert(tk.END,i+"\n")
 
     def change_dir(self):
         new_dir = filedialog.askdirectory()
