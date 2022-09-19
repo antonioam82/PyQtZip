@@ -44,7 +44,7 @@ class zipper():
         tk.Button(self.window,text="CLEAR SELECTION",width=14,bg="gray89",command=self.clear_selection).place(x=654,y=277)
         self.btnCreateZip = tk.Button(self.window,text="CREATE ZIP",width=73,bg="gray89")
         self.btnCreateZip.place(x=10,y=245)
-        self.btnChangeDir = tk.Button(self.window,text="CHANGE DIR",width=73,bg="gray89")
+        self.btnChangeDir = tk.Button(self.window,text="CHANGE DIR",width=73,bg="gray89",command=self.change_dir)
         self.btnChangeDir.place(x=10,y=277)
         self.current_dir = tk.StringVar()
         self.currentDir = tk.Entry(self.window,width=128,textvariable=self.current_dir)
@@ -56,6 +56,17 @@ class zipper():
 
     def BMP(self,s):
         return "".join((i if ord(i) < 10000 else '\ufffd' for i in s))
+
+    def change_dir(self):
+        new_dir = filedialog.askdirectory()
+        if new_dir != "":
+            self.entryDirs.delete(0,tk.END)
+            os.chdir(new_dir)
+            self.filesBox.delete('1.0',tk.END)
+            self.zip_content=[]
+            self.file_list()
+            self.current_dir.set(os.getcwd())
+            self.folderNme.set(self.folder_name())
 
     def folder_name(self):
         if self.folderNme.get() == "":
