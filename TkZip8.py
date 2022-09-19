@@ -39,8 +39,10 @@ class zipper():
         self.entryDirs.config(xscrollcommand = self.Hscrollbar.set)
         self.scrollbar.config(command = self.entryDirs.yview)
         self.Hscrollbar.config(command = self.entryDirs.xview)
-        self.btnSelect = tk.Button(self.window,text="ADD/REMOVE",width=15,bg="gray89",command=self.add_element)
+        self.btnSelect = tk.Button(self.window,text="ADD",width=7,bg="gray89",command=self.add_element)
         self.btnSelect.place(x=537,y=277)
+        self.btnRemove = tk.Button(self.window,text="REMOVE",width=7,bg="gray89",command=self.remove_element)
+        self.btnRemove.place(x=595,y=277)
         tk.Button(self.window,text="CLEAR SELECTION",width=14,bg="gray89",command=self.clear_selection).place(x=654,y=277)
         self.btnCreateZip = tk.Button(self.window,text="CREATE ZIP",width=73,bg="gray89")
         self.btnCreateZip.place(x=10,y=245)
@@ -64,11 +66,15 @@ class zipper():
             if element not in self.zip_content:
                 self.filesBox.insert(tk.END,element+"\n")
                 self.zip_content.append(element)
-            else:
+
+    def remove_element(self):
+        for i in self.entryDirs.curselection():
+            element = self.BMP(self.Filelist[i])
+            if element in self.zip_content:
                 self.zip_content.remove(element)
                 self.filesBox.delete('1.0',tk.END)
-                #for i in self.zip_content:
-                    #self.filesBox.insert(tk.END,i+"\n")
+                for i in self.zip_content:
+                    self.filesBox.insert(tk.END,i+"\n")
 
     def change_dir(self):
         new_dir = filedialog.askdirectory()
@@ -97,7 +103,7 @@ class zipper():
     def clear_selection(self):
         for i in self.entryDirs.curselection():
             self.entryDirs.selection_clear(i)
-        self.zip_content = []
+        #self.zip_content = []
 
     def file_list(self):
         counter = 0
