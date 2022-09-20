@@ -44,7 +44,7 @@ class zipper():
         self.btnRemove = tk.Button(self.window,text="REMOVE",width=7,bg="gray89",command=self.remove_element)
         self.btnRemove.place(x=595,y=277)
         tk.Button(self.window,text="CLEAR SELECTION",width=14,bg="gray89",command=self.clear_selection).place(x=654,y=277)
-        self.btnCreateZip = tk.Button(self.window,text="CREATE ZIP",width=73,bg="gray89")
+        self.btnCreateZip = tk.Button(self.window,text="CREATE ZIP",width=73,bg="gray89",command=self.make_zip)
         self.btnCreateZip.place(x=10,y=245)
         self.btnChangeDir = tk.Button(self.window,text="CHANGE DIR",width=73,bg="gray89",command=self.change_dir)
         self.btnChangeDir.place(x=10,y=277)
@@ -86,8 +86,26 @@ class zipper():
             self.file_list()
             self.current_dir.set(os.getcwd())
             self.folderNme.set(self.folder_name())
+            self.folder_name()
+
+    def check_ext(self,text):
+        if not text.endswith(".zip"):
+            namef = text+".zip"
+        else:
+            namef = text
+        return namef
 
     def folder_name(self):
+        count=0
+        for f in os.listdir():
+            if 'carpeta_comprimida' in f:
+                count+=1
+        if count>0:
+            return 'carpeta_comprimida '+str(count)+'.zip'
+        else:
+            return 'carpeta_comprimida.zip'
+
+    '''def folder_name(self):
         if self.folderNme.get() == "":
             count=0
             for f in os.listdir():
@@ -98,7 +116,27 @@ class zipper():
             else:
                 return 'carpeta_comprimida.zip'
         else:
-            return self.folderNme.get()
+            return self.folderNme.get()'''
+
+    def zip_info(self):
+        name = self.check_ext(self.folderNme.get())
+        with zipfile.ZipFile(name,'w') as archivo_zip:
+            for i in self.zip_content:
+                archivo_zip.write(i)
+            archivo_zip.close()
+            messagebox.showinfo('TAREA COMPLETADA','Archivo \'{}\' creado correctamente.'.format(name))
+            self.folderNme.set(self.folder_name())
+
+    def make_zip(self):
+        try:
+            if len(self.zip_content) > 0:
+                self.zip_info()
+            else:
+                message = messagebox.askquestion("CARPETA ZIP VACÍA",'¿Crear carpeta zip vacía?')
+                if message == "yes":
+                    self.zip_info()
+        except Exception as e:
+            messagebox.showwarning('ERROR',str(e))
 
     def clear_selection(self):
         for i in self.entryDirs.curselection():
@@ -129,4 +167,5 @@ su posible inclusión.''')
 
 if __name__=="__main__":
     zipper()
+
 
