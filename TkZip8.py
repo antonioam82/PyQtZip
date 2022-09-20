@@ -30,7 +30,7 @@ class zipper():
         self.entryName.place(x=100,y=216)
         self.labelName = tk.Label(self.window,text="ZIP FILE NAME:")
         self.labelName.place(x=10,y=216)
-        self.btnClear = tk.Button(self.window,text="CLEAR ALL",bg="gray89")
+        self.btnClear = tk.Button(self.window,text="CLEAR ALL",bg="gray89",command=self.clear_all)
         self.btnClear.place(x=450,y=212)
         self.entryDirs = tk.Listbox(self.canvas,width=34,height=14)
         self.entryDirs.pack()
@@ -105,18 +105,6 @@ class zipper():
         else:
             return 'carpeta_comprimida.zip'
 
-    '''def folder_name(self):
-        if self.folderNme.get() == "":
-            count=0
-            for f in os.listdir():
-                if 'carpeta_comprimida' in f:
-                    count+=1
-            if count>0:
-                return 'carpeta_comprimida '+str(count)+'.zip'
-            else:
-                return 'carpeta_comprimida.zip'
-        else:
-            return self.folderNme.get()'''
 
     def zip_info(self):
         name = self.check_ext(self.folderNme.get())
@@ -142,6 +130,10 @@ class zipper():
         for i in self.entryDirs.curselection():
             self.entryDirs.selection_clear(i)
         #self.zip_content = []
+
+    def clear_all(self):
+        self.zip_content = []
+        self.filesBox.delete('1.0',tk.END)
 
     def file_list(self):
         counter = 0
