@@ -140,9 +140,10 @@ class zipper():
         self.Filelist = []
         for i in os.listdir():
             try:
-                self.entryDirs.insert(tk.END,self.BMP(i))
-                counter+=1
-                self.Filelist.append(i)
+                if os.path.isfile(i):
+                    self.entryDirs.insert(tk.END,self.BMP(i))
+                    counter+=1
+                    self.Filelist.append(i)
             except:
                 self.special_chars = True
                 pass
