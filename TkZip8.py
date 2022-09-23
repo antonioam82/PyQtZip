@@ -111,7 +111,7 @@ class zipper():
         with zipfile.ZipFile(name,'w') as archivo_zip:
             for i in self.zip_content:
                 archivo_zip.write(i)
-            archivo_zip.close()
+            #archivo_zip.close()
             messagebox.showinfo('TAREA COMPLETADA','Archivo \'{}\' creado correctamente.'.format(name))
             self.folderNme.set(self.folder_name())
 
