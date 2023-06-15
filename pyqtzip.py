@@ -1,6 +1,6 @@
 import sys
 import os
-from PyQt5.QtWidgets import QApplication, QWidget, QTreeView, QFileSystemModel, QVBoxLayout, QPushButton, QFileDialog, QLabel
+from PyQt5.QtWidgets import QApplication, QWidget, QTreeView, QFileSystemModel, QVBoxLayout, QPushButton, QFileDialog, QLabel, QMessageBox
 from PyQt5.QtCore import QModelIndex
 import zipfile
 
@@ -50,6 +50,14 @@ class FileSystemView(QWidget):
             self.tree.setRootIndex(self.model.index(dirPath))
             self.currentDirLabel.setText(f"Directorio actual: {dirPath}")
 
+    def message_box(self,filename):
+       popup = QMessageBox()
+       poup.setWindowTitle("Acción Completada")
+       poup.setText(f"Archivo {filename} creado correctamente")
+       popup.setIcon(QMessageBox.Information)
+       popup.addButton(QMessageBox.Ok)
+       popup.exec()
+
     def createZip(self):
         selected_index = self.tree.currentIndex()
         selected_path = self.model.filePath(selected_index)
@@ -62,9 +70,10 @@ class FileSystemView(QWidget):
                     file_path = os.path.join(root, file)
                     zipf.write(file_path, os.path.relpath(file_path, selected_path))
 
-        print("Archivo ZIP creado:", zip_filename)
-
-
+        #print("Archivo ZIP creado:", zip_filename)
+        #self.message_box(zip_filename)
+        QMessageBox.information(self, "Archivo ZIP creado", "El archivo ZIP se ha creado correctamente.")
+            
 if __name__ == '__main__':
     app = QApplication(sys.argv)
 
