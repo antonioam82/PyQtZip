@@ -60,19 +60,24 @@ class FileSystemView(QWidget):
 
     def createZip(self):
         try:
+            
             selected_index = self.tree.currentIndex()
             selected_path = self.model.filePath(selected_index)
             selected_folder_name = os.path.basename(selected_path)
-            zip_filename = selected_folder_name + ".zip"
-            with zipfile.ZipFile(zip_filename, "w") as zipf:
-                for root, dirs, files in os.walk(selected_path):
-                    for file in files:
-                        file_path = os.path.join(root, file)
-                        zipf.write(file_path, os.path.relpath(file_path, selected_path))
+            print(selected_folder_name)
+            if selected_folder_name != ".txt":
+                zip_filename = selected_folder_name + ".zip"
+                with zipfile.ZipFile(zip_filename, "w") as zipf:
+                    for root, dirs, files in os.walk(selected_path):
+                        for file in files:
+                            file_path = os.path.join(root, file)
+                            zipf.write(file_path, os.path.relpath(file_path, selected_path))
 
-            #print("Archivo ZIP creado:", zip_filename)
-            #self.message_box(zip_filename)
-            QMessageBox.information(self, "Archivo ZIP creado", f"Archivo '{zip_filename}' creado correctamente.")
+                #print("Archivo ZIP creado:", zip_filename)
+                #self.message_box(zip_filename)
+                QMessageBox.information(self, "Archivo ZIP creado", f"Archivo '{zip_filename}' creado correctamente.")
+            else:
+                QMessageBox.information(self, "Carpeta no seleccionada", "Seleccione una carpeta para comprimir.")
         except Exception as e:
             QMessageBox.information(self, "ERROR INESPERADO", str(e))
 
