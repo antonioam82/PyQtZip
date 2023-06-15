@@ -72,8 +72,8 @@ class FileSystemView(QWidget):
 
         #print("Archivo ZIP creado:", zip_filename)
         #self.message_box(zip_filename)
-        QMessageBox.information(self, "Archivo ZIP creado", "El archivo ZIP se ha creado correctamente.")
-            
+        QMessageBox.information(self, "Archivo ZIP creado", f"Archivo '{zip_filename}' creado correctamente.")
+
 if __name__ == '__main__':
     app = QApplication(sys.argv)
 
