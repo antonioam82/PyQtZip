@@ -9,7 +9,7 @@ class FileSystemView(QWidget):
         super().__init__()
 
         # TITULO Y DIMENSIONES DE LA VENTANA.
-        self.setWindowTitle('File System Viewer')
+        self.setWindowTitle('ZIP File Creator')
         self.setGeometry(300, 300, 800, 300)
 
         # DEFINIR DIRECTORIO.
