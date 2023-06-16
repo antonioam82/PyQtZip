@@ -67,8 +67,6 @@ class FileSystemView(QWidget):
                                 zipf.write(file_path, os.path.relpath(file_path, selected_path))
 
                     QMessageBox.information(self, "Archivo ZIP creado", f"Archivo ZIP '{selected_folder_name}.zip' creado correctamente.")
-                else:
-                    QMessageBox.information(self, "Carpeta de destino no seleccionada", "Seleccione una carpeta de destino para guardar el archivo ZIP.")
             else:
                 QMessageBox.information(self, "Carpeta no seleccionada", "Seleccione una carpeta para comprimir.")
         except Exception as e:
@@ -83,4 +81,3 @@ if __name__ == '__main__':
     demo = FileSystemView(dirPath)
     demo.show()
     sys.exit(app.exec_())
-
