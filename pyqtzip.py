@@ -58,7 +58,7 @@ class FileSystemView(QWidget):
             selected_path = self.model.filePath(selected_index)
             selected_folder_name = os.path.basename(selected_path)
 
-            if selected_folder_name != ".txt":
+            if selected_folder_name != ".txt" and os.path.isdir(selected_path):
                 saveDirPath = QFileDialog.getExistingDirectory(self, "Seleccionar carpeta de destino", os.getcwd())
                 if saveDirPath:
                     zip_filename = os.path.join(saveDirPath, selected_folder_name + ".zip")
