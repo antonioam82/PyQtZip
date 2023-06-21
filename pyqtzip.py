@@ -64,6 +64,7 @@ class FileSystemView(QWidget):
                 if saveDirPath:
                     zip_filename = os.path.join(saveDirPath, selected_folder_name + ".zip")
 
+                    # BARRA DE PROGRESO EMERGENTE
                     progressDialog = QProgressDialog("Creando archivo ZIP...", "Cancelar", 0, 100, self)
                     progressDialog.setWindowTitle("Proceso")
                     progressDialog.setAutoClose(True)
