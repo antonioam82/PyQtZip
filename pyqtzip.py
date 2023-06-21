@@ -99,3 +99,4 @@ if __name__ == '__main__':
     demo = FileSystemView(dirPath)
     demo.show()
     sys.exit(app.exec_())
+    
