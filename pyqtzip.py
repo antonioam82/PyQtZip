@@ -46,6 +46,7 @@ class FileSystemView(QWidget):
 
         self.setLayout(layout)
 
+    # FUNCIÓN PARA CAMBIAR DIRECTORIO
     def changeDirectory(self):
         dirPath = QFileDialog.getExistingDirectory(self, "Seleccionar directorio", os.getcwd())
         if dirPath:
@@ -99,4 +100,3 @@ if __name__ == '__main__':
     demo = FileSystemView(dirPath)
     demo.show()
     sys.exit(app.exec_())
-    
