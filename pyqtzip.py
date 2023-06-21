@@ -1,8 +1,6 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
 import sys
 import os
-from PyQt5.QtWidgets import QApplication, QWidget, QTreeView, QFileSystemModel, QVBoxLayout, QPushButton, QFileDialog, QLabel, QMessageBox
+from PyQt5.QtWidgets import QApplication, QWidget, QTreeView, QFileSystemModel, QVBoxLayout, QPushButton, QFileDialog, QLabel, QMessageBox, QProgressDialog
 from PyQt5.QtCore import QModelIndex
 import zipfile
 
@@ -52,6 +50,7 @@ class FileSystemView(QWidget):
             self.tree.setRootIndex(self.model.index(dirPath))
             self.currentDirLabel.setText(f"Directorio actual: {dirPath}")
 
+    # FUNCIÓN PARA CREACIÓN DE ARCHIVO "ZIP".
     def createZip(self):
         try:
             selected_index = self.tree.currentIndex()
@@ -62,12 +61,26 @@ class FileSystemView(QWidget):
                 saveDirPath = QFileDialog.getExistingDirectory(self, "Seleccionar carpeta de destino", os.getcwd())
                 if saveDirPath:
                     zip_filename = os.path.join(saveDirPath, selected_folder_name + ".zip")
+
+                    progressDialog = QProgressDialog("Creando archivo ZIP...", "Cancelar", 0, 100, self)
+                    progressDialog.setWindowTitle("Proceso")
+                    progressDialog.setAutoClose(True)
+                    progressDialog.setWindowModality(2)
+                    progressDialog.show()
+
                     with zipfile.ZipFile(zip_filename, "w") as zipf:
-                        for root, dirs, files in os.walk(selected_path):
-                            for file in files:
+                        for i, (root, dirs, files) in enumerate(os.walk(selected_path)):
+                            for j, file in enumerate(files):
                                 file_path = os.path.join(root, file)
                                 zipf.write(file_path, os.path.relpath(file_path, selected_path))
 
+                                progress = (i * len(files) + j + 1) / (len(dirs) * len(files) + len(files)) * 100
+                                progressDialog.setValue(progress)
+                                if progressDialog.wasCanceled():
+                                    progressDialog.close()
+                                    return
+
+                    progressDialog.close()
                     QMessageBox.information(self, "Archivo ZIP creado", f"Archivo ZIP '{selected_folder_name}.zip' creado correctamente.")
             else:
                 QMessageBox.information(self, "Carpeta no seleccionada", "Seleccione una carpeta para comprimir.")
