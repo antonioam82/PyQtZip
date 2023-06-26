@@ -100,6 +100,9 @@ class FileSystemView(QWidget):
         except Exception as e:
             QMessageBox.information(self, "ERROR INESPERADO", str(e))
 
+    def init_progress_bar():
+        pass
+
     # FUNCIÓN PARA EXTRAER ARCHIVO ZIP.
     def extractZip(self):
         try:
@@ -112,8 +115,25 @@ class FileSystemView(QWidget):
                 if saveDirPath:
                     new_dir = os.path.join(saveDirPath,container_folder)
                     os.mkdir(new_dir)
+
+                    # BARRA DE PROGRESO EMERGENTE
+                    progressDialog = QProgressDialog("Extrayendo archivo ZIP...", "Cancelar", 0, 100, self)
+                    progressDialog.setWindowTitle("Proceso")
+                    progressDialog.setAutoClose(True)
+                    progressDialog.setWindowModality(2)
+                    progressDialog.show()
+
                     with zipfile.ZipFile(selected_path, "r") as zip_ref:
-                        zip_ref.extractall(new_dir)#(saveDirPath)
+                        file_count = len(zip_ref.infolist())
+                        for index, file in enumerate(zip_ref.infolist()):
+                            zip_ref.extract(file, new_dir)
+                            progress = (index + 1) / file_count * 100
+                            progressDialog.setValue(progress)
+                            if progressDialog.wasCanceled():
+                                progressDialog.close()
+                                return
+
+                    progressDialog.close()
                     QMessageBox.information(self, "Archivo ZIP extraído", "Archivo ZIP extraído correctamente.")
             else:
                 QMessageBox.information(self, "Archivo no seleccionado", "Seleccione un archivo ZIP para extraer.")
@@ -129,3 +149,4 @@ if __name__ == '__main__':
     demo = FileSystemView(dirPath)
     demo.show()
     sys.exit(app.exec_())
+
