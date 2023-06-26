@@ -105,12 +105,15 @@ class FileSystemView(QWidget):
         try:
             selected_index = self.tree.currentIndex()
             selected_path = self.model.filePath(selected_index)
+            container_folder = os.path.splitext(os.path.basename(selected_path))[0]
 
             if selected_path.endswith(".zip"):
                 saveDirPath = QFileDialog.getExistingDirectory(self, "Seleccionar carpeta de destino", os.getcwd())
                 if saveDirPath:
+                    new_dir = os.path.join(saveDirPath,container_folder)
+                    os.mkdir(new_dir)
                     with zipfile.ZipFile(selected_path, "r") as zip_ref:
-                        zip_ref.extractall(saveDirPath)
+                        zip_ref.extractall(new_dir)#(saveDirPath)
                     QMessageBox.information(self, "Archivo ZIP extraído", "Archivo ZIP extraído correctamente.")
             else:
                 QMessageBox.information(self, "Archivo no seleccionado", "Seleccione un archivo ZIP para extraer.")
