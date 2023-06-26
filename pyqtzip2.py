@@ -75,11 +75,7 @@ class FileSystemView(QWidget):
                     zip_filename = os.path.join(saveDirPath, selected_folder_name + ".zip")
 
                     # BARRA DE PROGRESO EMERGENTE
-                    progressDialog = QProgressDialog("Creando archivo ZIP...", "Cancelar", 0, 100, self)
-                    progressDialog.setWindowTitle("Proceso")
-                    progressDialog.setAutoClose(True)
-                    progressDialog.setWindowModality(2)
-                    progressDialog.show()
+                    self.init_progress_bar("Creando archivo zip...")
 
                     with zipfile.ZipFile(zip_filename, "w") as zipf:
                         for i, (root, dirs, files) in enumerate(os.walk(selected_path)):
@@ -100,8 +96,13 @@ class FileSystemView(QWidget):
         except Exception as e:
             QMessageBox.information(self, "ERROR INESPERADO", str(e))
 
-    def init_progress_bar():
-        pass
+    def init_progress_bar(self, texto):
+        global progressDialog
+        progressDialog = QProgressDialog(texto, "Cancelar", 0, 100, self)
+        progressDialog.setWindowTitle("Proceso")
+        progressDialog.setAutoClose(True)
+        progressDialog.setWindowModality(2)
+        progressDialog.show()
 
     # FUNCIÓN PARA EXTRAER ARCHIVO ZIP.
     def extractZip(self):
@@ -117,11 +118,7 @@ class FileSystemView(QWidget):
                     os.mkdir(new_dir)
 
                     # BARRA DE PROGRESO EMERGENTE
-                    progressDialog = QProgressDialog("Extrayendo archivo ZIP...", "Cancelar", 0, 100, self)
-                    progressDialog.setWindowTitle("Proceso")
-                    progressDialog.setAutoClose(True)
-                    progressDialog.setWindowModality(2)
-                    progressDialog.show()
+                    self.init_progress_bar("Extrayendo archivo zip...")
 
                     with zipfile.ZipFile(selected_path, "r") as zip_ref:
                         file_count = len(zip_ref.infolist())
@@ -149,4 +146,3 @@ if __name__ == '__main__':
     demo = FileSystemView(dirPath)
     demo.show()
     sys.exit(app.exec_())
-
