@@ -141,7 +141,7 @@ if __name__ == '__main__':
     app = QApplication(sys.argv)
 
     # DIRECTORIO BASE.
-    dirPath = os.getcwd()
+    dirPath = os.getcwd()###
 
     demo = FileSystemView(dirPath)
     demo.show()
